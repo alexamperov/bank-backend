@@ -13,10 +13,14 @@ exports.createApplication = async (req, res) => {
     }
 };
 
+// TODO Протестировать работу двух случаев - ID из токена и ID из query
 exports.getApplicationsByUserId = async (req, res) => {
     try {
         if (!!req.query.user_id){
             const apps = await Application.getAllByUserId(req.user.id);
+            res.json(apps);
+        } else {
+            const apps = await Application.getAllByUserId(req.query.user_id);
             res.json(apps);
         }
 
@@ -25,6 +29,8 @@ exports.getApplicationsByUserId = async (req, res) => {
     }
 };
 
+
+// TODO Протестировать работу
 exports.approveApplication = async (req, res) => {
     try {
         const { applicationId } = req.params;
@@ -47,7 +53,7 @@ exports.approveApplication = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
-
+// TODO Протестировать работу
 exports.rejectApplication = async (req, res) => {
     try {
         const { applicationId } = req.params;

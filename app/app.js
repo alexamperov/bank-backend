@@ -18,10 +18,14 @@ app.use(express.json());
 const userRoutes = require('./routes/userRoutes');
 const applicationRoutes = require('./routes/applicationRoutes');
 const dealRoutes = require('./routes/dealRoutes');
+const delayRoutes = require('./routes/delayRoutes');
+const payRoutes = require('./routes/payRoutes');
 
 app.use('/api', userRoutes);
 app.use('/api', applicationRoutes);
 app.use('/api', dealRoutes);
+app.use('/api', delayRoutes);
+app.use('/api', payRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
