@@ -44,3 +44,24 @@ exports.getDelaysByDealId = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
+// Оплатить просрочку (меняет статус на 'paid')
+exports.payDelay = async (req, res) => {
+    try {
+        const { delayId } = req.params;
+
+        const delay = await Delay.getById(delayId);
+        if (!delay) return res.status(404).json({ error: 'Delay not found' });
+
+        // Проверка, что пользователь — владелец договора или администратор
+        const deal = await Deal.getById(delay.deal_id);
+        if (deal.user_id !== req.user.id && req.user.role !== 'admin' && req.user.role !== 'employee') {
+            return res.status(403).json({ error: 'Access denied' });
+        }
+
+        // Обновляем статус просрочки
+        const updatedDelay = await Delay.updateStatus(delayId, 'paid');
+        res.json(updatedDelay);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};

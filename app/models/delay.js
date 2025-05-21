@@ -18,6 +18,16 @@ const Delay = {
     getAllByDealId: async (dealId) => {
         const res = await pool.query('SELECT * FROM delays WHERE deal_id = $1', [dealId]);
         return res.rows;
+    },
+
+    updateStatus: async (delayId, status) => {
+        const query = `
+      UPDATE delays 
+      SET status = $1 
+      WHERE id = $2 
+      RETURNING *`;
+        const res = await pool.query(query, [status, delayId]);
+        return res.rows[0];
     }
 };
 
