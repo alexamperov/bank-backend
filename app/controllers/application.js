@@ -16,11 +16,11 @@ exports.createApplication = async (req, res) => {
 // TODO Протестировать работу двух случаев - ID из токена и ID из query
 exports.getApplicationsByUserId = async (req, res) => {
     try {
-        if (!!req.query.user_id){
-            const apps = await Application.getAllByUserId(req.user.id);
+        if (req.query.user_id){
+            const apps = await Application.getAllByUserId(req.query.user_id);
             res.json(apps);
         } else {
-            const apps = await Application.getAllByUserId(req.query.user_id);
+            const apps = await Application.getAllByUserId(req.user.id);
             res.json(apps);
         }
 

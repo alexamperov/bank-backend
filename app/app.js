@@ -28,5 +28,6 @@ app.use('/api', delayRoutes);
 app.use('/api', payRoutes);
 
 app.listen(PORT, () => {
+    console.log(process.env.EMAIL_PASS)
     console.log(`Server running on port ${PORT}`);
 });
