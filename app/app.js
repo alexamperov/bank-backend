@@ -20,12 +20,14 @@ const applicationRoutes = require('./routes/applicationRoutes');
 const dealRoutes = require('./routes/dealRoutes');
 const delayRoutes = require('./routes/delayRoutes');
 const payRoutes = require('./routes/payRoutes');
+const dataRoutes = require('./routes/dataRoutes');
 
 app.use('/api', userRoutes);
 app.use('/api', applicationRoutes);
 app.use('/api', dealRoutes);
 app.use('/api', delayRoutes);
 app.use('/api', payRoutes);
+app.use('/api', dataRoutes)
 
 app.listen(PORT, () => {
     console.log(process.env.EMAIL_PASS)

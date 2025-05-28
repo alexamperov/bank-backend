@@ -34,8 +34,8 @@ exports.getApplicationsByUserId = async (req, res) => {
 exports.approveApplication = async (req, res) => {
     try {
         const { applicationId } = req.params;
-        const employee = await User.getById(req.user.id);
-        if (employee.role !== 'employee' && employee.role !== 'admin') {
+        c
+        if (req.user.role !== 'employee' && req.user.role !== 'admin') {
             return res.status(403).json({ error: 'Access denied' });
         }
 

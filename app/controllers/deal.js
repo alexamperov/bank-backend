@@ -4,11 +4,11 @@ const Deal = require('../models/deal');
 exports.getDealsByUserId = async (req, res) => {
 
     try { // Если пользователь запрашивает свои договоры
-        if (!!req.query.user_id){
-            const deals = await Deal.getAllByUserId(req.user.id);
+        if (req.query.user_id){
+            const deals = await Deal.getAllByUserId(req.query.user_id);
             res.json(deals);
         } else {        // Если работник или админ запрашивают договоры по айди пользователя
-            const deals = await Deal.getAllByUserId(req.query.user_id);
+            const deals = await Deal.getAllByUserId(req.user.id);
             res.json(deals);
         }
 

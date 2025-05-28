@@ -11,10 +11,10 @@ exports.createDelay = async (req, res) => {
     try {
         const { dealId } = req.params;
         const { amount } = req.body;
-        const employee = await User.getById(req.user.id);
+
 
         // Проверка роли
-        if (employee.role !== 'employee' && employee.role !== 'admin') {
+        if (req.user.role !== 'employee' && req.user.role !== 'admin') {
             return res.status(403).json({ error: 'Access denied' });
         }
 

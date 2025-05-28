@@ -7,7 +7,7 @@ const { createDelay, getDelaysByDealId, payDelay } = require('../controllers/del
 router.post('/deals/:dealId/delays', authenticate, createDelay);
 
 // Получение просрочек по договору
-router.get('deals/:dealId/delays', authenticate, getDelaysByDealId);
+router.get('/deals/:dealId/delays', authenticate, getDelaysByDealId);
 
 router.post('/delays/:delayId/pay', authenticate, payDelay);
 
