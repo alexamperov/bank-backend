@@ -5,11 +5,13 @@ const {
     createApplication,
     getApplicationsByUserId,
     approveApplication,
-    rejectApplication
+    rejectApplication,
+    getAllApplications
 } = require('../controllers/application');
 
 router.post('/applications', authenticate, createApplication);
 router.get('/applications', authenticate, getApplicationsByUserId);
+router.get('/applications_all', authenticate, getAllApplications);
 router.post('/applications/:applicationId/approve', authenticate, approveApplication);
 router.post('/applications/:applicationId/reject', authenticate, rejectApplication);
 

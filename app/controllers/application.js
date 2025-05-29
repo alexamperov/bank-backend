@@ -12,7 +12,15 @@ exports.createApplication = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
+exports.getAllApplications = async  (req, res) => {
+    try {
+        const apps = await Application.getAll();
 
+        res.status(200).json(apps);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+}
 // TODO Протестировать работу двух случаев - ID из токена и ID из query
 exports.getApplicationsByUserId = async (req, res) => {
     try {
@@ -34,7 +42,7 @@ exports.getApplicationsByUserId = async (req, res) => {
 exports.approveApplication = async (req, res) => {
     try {
         const { applicationId } = req.params;
-        c
+
         if (req.user.role !== 'employee' && req.user.role !== 'admin') {
             return res.status(403).json({ error: 'Access denied' });
         }

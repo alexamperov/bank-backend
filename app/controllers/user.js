@@ -27,7 +27,15 @@ exports.register = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
-
+exports.getAllEmployees = async (req, res) => {
+    try {
+        const employees = await User.getAllEmployees();
+        const usersWithoutPasswords = employees.map(({ password, ...user }) => user);
+        res.json(usersWithoutPasswords);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
 exports.verifyEmail = async (req, res) => {
     try {
         const { email, code } = req.body;

@@ -26,6 +26,11 @@ const Application = {
             [status, employeeId, id]
         );
         return res.rows[0];
+    },
+    getAll: async () => {
+        const res = await pool.query('SELECT * FROM applies WHERE status = $1', ["pending"]);
+
+        return res.rows;
     }
 };
 

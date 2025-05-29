@@ -35,6 +35,10 @@ const User = {
     },
     updateVerification: async (email) => {
         await pool.query('UPDATE users SET is_verified = true WHERE email = $1', [email]);
+    },
+    getAllEmployees: async () => {
+        const res = await pool.query('SELECT * FROM users WHERE user_role = $1', ['employee']);
+        return res.rows;
     }
 };
 

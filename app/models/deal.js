@@ -17,6 +17,14 @@ const Deal = {
     getById: async (id) => {
         const res = await pool.query('SELECT * FROM deals WHERE id = $1', [id]);
         return res.rows[0];
+    },
+    getAllByEmployeeId: async (employeeId) => {
+        const res = await pool.query( 'SELECT * FROM deals WHERE employee_id = $1', [employeeId])
+        return res.rows
+    },
+    getAll: async () => {
+        const res = await pool.query( 'SELECT * FROM deals')
+        return res.rows
     }
 };
 
